@@ -91,6 +91,28 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         //        manager.stopUpdatingLocation()
     }
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+
+            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager.startUpdatingLocation()
+
+        case .restricted, .denied:
+            SVProgressHUD.dismiss()
+            SVProgressHUD.showError(withStatus: "Please enable location services")
+        case .authorizedAlways, .authorizedWhenInUse:
+            self.locationManager.startUpdatingLocation()
+            
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        SVProgressHUD.dismiss()
+        SVProgressHUD.showError(withStatus: error.localizedDescription)
+    }
+    
+    
     // MARK: - tableView delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return placesArray.count
