@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let kGoogleAPIKey = "Your API Key HERE"
+private let kGoogleAPIKey = "Your Google API Key HERE"
 private let kURLGoogleSearch = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
 
 class GooglePlacesAPI {
